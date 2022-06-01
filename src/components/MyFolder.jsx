@@ -1,4 +1,4 @@
-import { ChevronRight, Folder } from "@mui/icons-material";
+import { ChevronRight, Folder, PropaneSharp } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 const fs = window.require("fs");
 function MyFolder(props) {
@@ -14,7 +14,7 @@ function MyFolder(props) {
   }, [props]);
   return (
     <div
-      className={`flex cursor-pointer ${!subFolder && "gap-2"} items-center`}
+      className={`flex cursor-pointer ${!subFolder && "gap-2"} items-center pl-2`}
     >
       {subFolder && (
         <ChevronRight
@@ -42,7 +42,7 @@ function MyFolder(props) {
               : { ...props, color: "gray" }
           }
         />
-        <span className="text-lg">{props.name}</span>
+        <span className="text-lg">{props.name.length >10 ? props.name.slice(0, 10) : props.name}</span>
       </div>
     </div>
   );
