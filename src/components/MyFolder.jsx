@@ -5,14 +5,45 @@ function MyFolder(props) {
   const [subFolder, setSubFolder] = useState(false);
   useEffect(() => {
     fs.readdir(props.directory, (_e, files) => {
-      files.length > 0 && files.map((file)=> fs.lstatSync(`${props.directory}/${file}`).isFile()).includes(false) && setSubFolder(true);
+      files?.length > 0 &&
+        files
+          .map((file) => fs.lstatSync(`${props.directory}/${file}`).isFile())
+          .includes(false) &&
+        setSubFolder(true);
     });
-  }, []);
+  }, [props]);
   return (
-    <div {...props} className="flex cursor-pointer items-center">
-      {subFolder && <ChevronRight style={props.clicked ? {transform: "rotate(90deg)", transitionDuration: 10, transitionProperty: 'all'} : {transform: "rotate(0)", transitionDuration: 100, transitionProperty: 'all'}}/>}
-      <Folder style={{ ...props, color: "gray" }} />
-      <span className="text-lg">{props.name}</span>
+    <div
+      className={`flex cursor-pointer ${!subFolder && "gap-2"} items-center`}
+    >
+      {subFolder && (
+        <ChevronRight
+          {...props}
+          style={
+            props.clicked || props?.clicks?.includes(props.index)
+              ? {
+                  transform: "rotate(90deg)",
+                  transitionDuration: 10,
+                  transitionProperty: "all",
+                }
+              : {
+                  transform: "rotate(0)",
+                  transitionDuration: 100,
+                  transitionProperty: "all",
+                }
+          }
+        />
+      )}
+      <div className="flex items-center">
+        <Folder
+          style={
+            !subFolder
+              ? { ...props, color: "gray", marginLeft: "1.5rem" }
+              : { ...props, color: "gray" }
+          }
+        />
+        <span className="text-lg">{props.name}</span>
+      </div>
     </div>
   );
 }
