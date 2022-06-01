@@ -14,7 +14,7 @@ import {
 function Navigation() {
 
   return (
-    <div className="bg-white border-2 fixed top-0 w-full border-solid text-black items-center h-[4rem] px-3 flex justify-between">
+    <div className="bg-white border-[1px] border-gray-300 fixed top-0 w-full border-solid text-black items-center h-[4rem] px-3 flex justify-between">
       <div className="flex gap-2">
         <ArrowBack style={{width: '1.8rem', height: '1.8rem'}}/>
         <ArrowForward style={{width: '1.8rem', height: '1.8rem'}}/>

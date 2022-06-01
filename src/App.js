@@ -1,13 +1,13 @@
-import { HashRouter,  Route, Routes } from "react-router-dom";
+import { BrowserRouter,  Route, Routes } from "react-router-dom";
 import Directory from './pages/Directory'
 function App() {
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Directory />}/>
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
