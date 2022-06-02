@@ -6,7 +6,7 @@ function MyFolder(props) {
   const [subFolder, setSubFolder] = useState(false);
   const { setCurrentDir } = useContext(ContextProvider);
   useEffect(() => {
-    fs.readdir(props.directory, (_e, files) => {
+    fs.readdir(props.index, (_e, files) => {
       files?.length > 0 &&
         files
           .map((file) => fs.lstatSync(`${props.directory}/${file}`).isFile())
@@ -16,13 +16,15 @@ function MyFolder(props) {
   }, [props]);
   return (
     <div
-      className={`flex cursor-pointer ${(!subFolder || props.main) && "gap-2"} items-center ${!props.main && 'pl-2'}`}
+      className={`flex cursor-pointer ${
+        (!subFolder || props.main) && "gap-2"
+      } items-center ${!props.main && "pl-2"}`}
     >
       {subFolder && !props.main && (
         <ChevronRight
           {...props}
           style={
-            props.clicked || props?.clicks?.includes(props.index)
+            props?.clicks?.includes(props.index) 
               ? {
                   transform: "rotate(90deg)",
                   transitionDuration: 10,
@@ -36,15 +38,29 @@ function MyFolder(props) {
           }
         />
       )}
-      <div onClick={() => setCurrentDir(props.index)} className={`flex gap-1 items-center ${props.main && 'flex-col'}`}>
+      <div
+        onClick={() => setCurrentDir(props.index)}
+        className={`flex gap-1 items-center ${props.main && "flex-col"}`}
+      >
         <Folder
           style={
             !subFolder
-              ? { ...props, height: props.width, color: "gray", marginLeft: `${!props.main ? '1.5rem' : 0}` }
+              ? {
+                  ...props,
+                  height: props.width,
+                  color: "gray",
+                  marginLeft: `${!props.main ? "1.5rem" : 0}`,
+                }
               : { ...props, height: props.width, color: "gray" }
           }
         />
-        <span className={`text-lg overflow-ellipsis max-w-[6rem]  overflow-hidden ${props.main && 'font-bold'}`}>{props.name}</span>
+        <span
+          className={`text-lg overflow-ellipsis max-w-[6rem]  overflow-hidden ${
+            props.main && "font-bold"
+          }`}
+        >
+          {props.name}
+        </span>
       </div>
     </div>
   );

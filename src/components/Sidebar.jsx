@@ -16,7 +16,6 @@ function Sidebar() {
       setFiles(files);
     });
   }, []);
-  const [clicked, setClicked] = useState(true);
   const [width, setWidth] = useState("fit-content");
   return (
     <div
@@ -25,18 +24,19 @@ function Sidebar() {
     >
       <div
         className={`${
-          clicked ? `h-[${files.length * 29.2}px]` : "h-[30px]"
+        clicks.includes('/') ? `h-[${files.length * 29.2}px]` : "h-[30px]"
         } overflow-hidden gap-1 flex flex-col duration-700`}
       >
         <MyFolder
-          clicked={clicked}
           onClick={() => {
-            setClicked(!clicked);
             setCurrentDir('/')
+            clickHere('/');
           }}
           name="computer"
           directory="/"
           index="/"
+          clicks={clicks}
+
           width="2rem"
         />
         <div className="pl-2 flex gap-1 flex-col">
@@ -46,7 +46,6 @@ function Sidebar() {
                 <div key={index}>
                   <MyFolder
                     cursor="pointer"
-                    clicked={false}
                     index={path.join("/", file)}
                     onClick={() => {
                       clickHere(path.join("/", file));

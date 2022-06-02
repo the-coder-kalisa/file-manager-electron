@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ContextProvider } from "../context/Click";
-import MyFolder from "./MyFolder";
+import FileMe from "./FileMe";
 
-const path = window.require("path");
 const fs = window.require("fs");
 
 function Main() {
-  const { currentDir, setCurrentDir } = useContext(ContextProvider);
+  const { currentDir } = useContext(ContextProvider);
   const [files, setFiles] = useState([]);
   useEffect(() => {
     fs.readdir(currentDir, (err, files) => {
       setFiles(files);
     });
   }, [currentDir]);
+  
+
   return (
     <div>
       <div className="border-b-2 w-[150%] -ml-1 border-solid">
@@ -23,15 +24,8 @@ function Main() {
         className="px-3 gap-5 grid "
       >
         {files?.map((file, index) => (
-          <div key={index}>
-            {console.log(path.join(currentDir, file))}
-            <MyFolder
-              main={true}
-              width={100}
-              index={path.join(currentDir, file)}
-              name={file}
-              directory={path.join(currentDir, file)}
-            />
+          <div key={index}> 
+          <FileMe file={file}/>
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 export const ContextProvider = createContext();
 function ClickThe({ children }) {
-  const [clicks, setClicks] = useState([]);
+  const [clicks, setClicks] = useState(['/']);
   const [currentDir, setCurrentDir] = useState('/');
   const clickHere = (index) => {
     let clicked = clicks.filter((clicks) => clicks !== index);

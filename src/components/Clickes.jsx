@@ -9,7 +9,7 @@ const Clickes = ({ clik, clicks }) => {
     files.map((file) => file);
   });
   const { clickHere } = useContext(ContextProvider);
-  console.log(clik)
+
   return (
     files
       .map((file) => fs.lstatSync(path.join(clik, file)).isFile())
