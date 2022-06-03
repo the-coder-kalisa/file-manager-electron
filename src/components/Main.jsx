@@ -24,7 +24,6 @@ function Main() {
           .join("/")
     );
   };
-
   return (
     <div className="w-full">
       <div className="border-b-2 flex -ml-1 border-solid">

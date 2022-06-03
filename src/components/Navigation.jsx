@@ -14,22 +14,30 @@ import {
 import { ContextProvider } from "../context/Click";
 const path = window.require("path");
 function Navigation() {
-  const { currentDir, setCurrentDir, search, setSearch } =
+  const { currentDir, setCurrentDir, search, history, setSearch } =
     useContext(ContextProvider);
   const goUp = () => {
     setCurrentDir(path.normalize(`${currentDir}/../`));
   };
-
   return (
     <div className="bg-white border-[1px] z-50 border-gray-300 fixed top-0 w-full border-solid text-black items-center h-[4rem] px-3 flex justify-between">
       <div className="flex gap-2">
         <ArrowBack
           className="cursor-pointer"
+          onClick={() => {
+            currentDir !== history[0] &&
+              history.length > 1 &&
+              setCurrentDir(history[history.lastIndexOf(currentDir) - 1]);
+          }}
           style={{ width: "1.8rem", height: "1.8rem" }}
         />
         <ArrowForward
           className="cursor-pointer"
           style={{ width: "1.8rem", height: "1.8rem" }}
+          onClick={() => {
+            currentDir !== history[history.length - 1] &&
+              setCurrentDir(history[history.indexOf(currentDir) + 1]);
+          }}
         />
         <ArrowUpward
           onClick={goUp}

@@ -4,7 +4,7 @@ import { ContextProvider } from "../context/Click";
 const fs = window.require("fs");
 function MyFolder(props) {
   const [subFolder, setSubFolder] = useState(false);
-  const { setCurrentDir } = useContext(ContextProvider);
+  const { setCurrentDir, history, setHistory, currentDir } = useContext(ContextProvider);
   useEffect(() => {
     fs.readdir(props.index, (_e, files) => {
       files?.length > 0 &&
@@ -24,7 +24,7 @@ function MyFolder(props) {
         <ChevronRight
           {...props}
           style={
-            props?.clicks?.includes(props.index) 
+            props?.clicks?.includes(props.index)
               ? {
                   transform: "rotate(90deg)",
                   transitionDuration: 10,
@@ -39,7 +39,13 @@ function MyFolder(props) {
         />
       )}
       <div
-        onClick={() => setCurrentDir(props.index)}
+        onClick={() => {
+          setCurrentDir(props.index);
+          let myHist = history.filter((_value, index)=>(
+            index<=history.indexOf(currentDir)
+          ))
+          !history.includes(currentDir) ? setHistory([...history, props.index]) : setHistory([...myHist, props.index])
+        }}
         className={`flex gap-1 items-center ${props.main && "flex-col"}`}
       >
         <Folder
@@ -55,9 +61,9 @@ function MyFolder(props) {
           }
         />
         <span
-          className={`text-lg max-w-[8rem] ${props.main ? 'break-words text-center' : 'truncate'} ${
-            props.main && "font-bold"
-          }`}
+          className={`text-lg max-w-[8rem] ${
+            props.main ? "break-words text-center" : "truncate"
+          } ${props.main && "font-bold"}`}
         >
           {props.name}
         </span>
