@@ -11,7 +11,7 @@ function Main() {
     fs.readdir(currentDir, (_err, files) => {
       setFiles(files);
       search.length &&
-        setFiles(files.filter((value) => value.startsWith(search)));
+        setFiles(files.filter((value) => value.includes(search)));
     });
   }, [currentDir, search]);
   const changeLoc = (index) => {
@@ -44,16 +44,24 @@ function Main() {
             </div>
           ))}
       </div>
-      <div
-        style={{ gridTemplateColumns: "repeat(auto-fill,minmax(150px, 1fr))" }}
-        className="px-3 grid w-full"
-      >
-        {files?.map((file, index) => (
-          <div key={index}>
-            <FileMe file={file} />
-          </div>
-        ))}
-      </div>
+      {files?.length ? (
+        <div
+          style={{
+            gridTemplateColumns: "repeat(auto-fill,minmax(150px, 1fr))",
+          }}
+          className="px-3 grid w-full"
+        >
+          {files?.map((file, index) => (
+            <div key={index}>
+              <FileMe file={file} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex text-2xl h-[70vh] font-bold tex items-center justify-center">
+          No file was found
+        </div>
+      )}
     </div>
   );
 }

@@ -55,7 +55,7 @@ function MyFolder(props) {
           }
         />
         <span
-          className={`text-lg max-w-[7rem] truncate ${
+          className={`text-lg max-w-[8rem] ${props.main ? 'break-words text-center' : 'truncate'} ${
             props.main && "font-bold"
           }`}
         >

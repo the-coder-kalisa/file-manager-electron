@@ -6,6 +6,7 @@ import MyFolder from "./MyFolder";
 const path = window.require("path");
 const fs = window.require("fs");
 
+
 const FileMe = ({ file }) => {
   const [isFile, setIsfile] = useState(false);
   const { currentDir } = useContext(ContextProvider);
@@ -16,15 +17,16 @@ const FileMe = ({ file }) => {
   }, [currentDir, file]);
   return isFile ? (
     <Files
-      main={true}
+      main={true.toString()}
       width={100}
+      file={file}
       index={path.join(currentDir, file)}
       name={file}
       directory={path.join(currentDir, file)}
     />
   ) : (
     <MyFolder
-      main={true}
+      main={true.toString()}
       width={100}
       index={path.join(currentDir, file)}
       name={file}

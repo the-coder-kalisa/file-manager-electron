@@ -50,10 +50,17 @@ function Navigation() {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          onBlur={()=> setSearch("")}
+          onBlur={() => setSearch("")}
           className={`bg-transparent w-[10rem] outline-none`}
         />
-        <Close style={{ width: "1.8rem", height: "1.8rem" }} />
+        <Close
+          onClick={() => {
+            setSearch("");
+            document.querySelector("input").focus();
+          }}
+          className="cursor-pointer"
+          style={{ width: "1.8rem", height: "1.8rem" }}
+        />
       </div>
     </div>
   );
