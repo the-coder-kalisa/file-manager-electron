@@ -14,7 +14,8 @@ import {
 import { ContextProvider } from "../context/Click";
 const path = window.require("path");
 function Navigation() {
-  const { currentDir, setCurrentDir } = useContext(ContextProvider);
+  const { currentDir, setCurrentDir, search, setSearch } =
+    useContext(ContextProvider);
   const goUp = () => {
     setCurrentDir(path.normalize(`${currentDir}/../`));
   };
@@ -45,7 +46,13 @@ function Navigation() {
       </div>
       <div className="border-2 gap-3 rounded-md border-solid h-[3rem] px-3 flex items-center">
         <Search style={{ width: "1.8rem", height: "1.8rem" }} />
-        <input className={`bg-transparent w-[10rem] outline-none`} />
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onBlur={()=> setSearch("")}
+          className={`bg-transparent w-[10rem] outline-none`}
+        />
         <Close style={{ width: "1.8rem", height: "1.8rem" }} />
       </div>
     </div>
