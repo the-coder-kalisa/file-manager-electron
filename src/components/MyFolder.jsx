@@ -55,7 +55,7 @@ function MyFolder(props) {
           }
         />
         <span
-          className={`text-lg overflow-ellipsis max-w-[6rem]  overflow-hidden ${
+          className={`text-lg max-w-[7rem] truncate ${
             props.main && "font-bold"
           }`}
         >

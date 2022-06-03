@@ -11,8 +11,7 @@ const FileMe = ({ file }) => {
   const { currentDir } = useContext(ContextProvider);
   useEffect(() => {
     fs.stat(path.join(currentDir, file), (error, arg) => {
-      if (error) console.log(error);
-      setIsfile(arg.isFile());
+      setIsfile(arg?.isFile());
     });
   }, [currentDir, file]);
   return isFile ? (

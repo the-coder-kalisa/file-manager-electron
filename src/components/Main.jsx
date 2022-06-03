@@ -13,15 +13,16 @@ function Main() {
     });
   }, [currentDir]);
   
-
   return (
     <div>
-      <div className="border-b-2 w-[150%] -ml-1 border-solid">
-        {currentDir.split('/').join('>')}
+      <div className="border-b-2 flex -ml-1 border-solid">
+        {currentDir.split('/').slice(1).map((one, index)=>(
+         <div key={index} className="cursor-pointer">{one}{index !== currentDir.split('/').slice(1).length-1 && <span>&gt;</span>}</div>
+        ))}
       </div>
       <div
-        style={{ gridTemplateColumns: " repeat(13, minmax(0, 1fr))" }}
-        className="px-3 gap-5 grid "
+        style={{ gridTemplateColumns: "repeat(11, minmax(0, 1fr))" }}
+        className="px-3 gap-10 grid "
       >
         {files?.map((file, index) => (
           <div key={index}> 
