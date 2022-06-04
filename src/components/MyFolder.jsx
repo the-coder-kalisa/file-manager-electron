@@ -4,7 +4,7 @@ import { ContextProvider } from "../context/Click";
 const fs = window.require("fs");
 function MyFolder(props) {
   const [subFolder, setSubFolder] = useState(false);
-  const { setCurrentDir, history, selected, setHistory, currentDir } =
+  const { setCurrentDir, history, setHistory, currentDir } =
     useContext(ContextProvider);
   useEffect(() => {
     fs.readdir(props.index, (_e, files) => {
@@ -70,23 +70,13 @@ function MyFolder(props) {
               : { ...props, height: props.width, color: "gray" }
           }
         />
-        {props.show === selected ? (
-          <input
-            defaultValue={props.name}
-            className={`text-lg max-w-[8rem] text-black ${
-              props.main ? "break-words textcenter" : "truncate"
-            } ${props.main && "font-bold"}`}
-            type="text"
-          />
-        ) : (
-          <span
-            className={`text-lg max-w-[8rem] ${
-              props.main ? "break-words text-center" : "truncate"
-            } ${props.main && "font-bold"}`}
-          >
-            {props.name}
-          </span>
-        )}
+        <span
+          className={`text-lg max-w-[8rem] ${
+            props.main ? "break-words text-center" : "truncate"
+          } ${props.main && "font-bold"}`}
+        >
+          {props.name}
+        </span>
       </div>
     </div>
   );
