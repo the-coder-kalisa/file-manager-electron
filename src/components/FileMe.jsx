@@ -6,12 +6,11 @@ import MyFolder from "./MyFolder";
 const path = window.require("path");
 const fs = window.require("fs");
 
-
-const FileMe = ({ file }) => {
+const FileMe = ({ file, onClick,show, select }) => {
   const [isFile, setIsfile] = useState(false);
   const { currentDir } = useContext(ContextProvider);
   useEffect(() => {
-    fs.stat(path.join(currentDir, file), (error, arg) => {
+    fs.stat(path.join(currentDir, file), (_error, arg) => {
       setIsfile(arg?.isFile());
     });
   }, [currentDir, file]);
@@ -19,18 +18,22 @@ const FileMe = ({ file }) => {
     <Files
       main={true.toString()}
       width={100}
+      onClicks={onClick}
       file={file}
+      select={select}
       index={path.join(currentDir, file)}
       name={file}
-      directory={path.join(currentDir, file)}
+      show={show}
     />
   ) : (
     <MyFolder
+      show={show}
+      onClicks={onClick}
       main={true.toString()}
       width={100}
+      select={select}
       index={path.join(currentDir, file)}
       name={file}
-      directory={path.join(currentDir, file)}
     />
   );
 };

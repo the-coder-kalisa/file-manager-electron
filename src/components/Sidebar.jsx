@@ -5,7 +5,12 @@ import { ContextProvider } from "../context/Click";
 const fs = window.require("fs");
 const path = window.require("path");
 function Sidebar() {
-  const { clicks, clickHere, setCurrentDir } = useContext(ContextProvider);
+  const {
+    clicks,
+    clickHere,
+    setCurrentDir,
+    selected
+  } = useContext(ContextProvider);
 
   const [files, setFiles] = useState([]);
   const ken = useRef();
@@ -24,19 +29,20 @@ function Sidebar() {
     >
       <div
         className={`${
-        clicks.includes('/') ? `h-[${files.length * 29.2}px]` : "h-[30px]"
+          clicks.includes("/") ? `h-[${files.length * 29.2}px]` : "h-[30px]"
         } overflow-hidden gap-1 flex flex-col duration-700`}
       >
         <MyFolder
+          onClicks={() => {
+            setCurrentDir("/");
+          }}
           onClick={() => {
-            setCurrentDir('/')
-            clickHere('/');
+            clickHere("/");
           }}
           name="computer"
           directory="/"
           index="/"
           clicks={clicks}
-
           width="2rem"
         />
         <div className="pl-2 flex gap-1 flex-col">
@@ -45,14 +51,14 @@ function Sidebar() {
               !fs.lstatSync(path.join("/", file)).isFile() && (
                 <div key={index}>
                   <MyFolder
-                    cursor="pointer"
-                    index={path.join("/", file)}
+                    select={selected}
                     onClick={() => {
                       clickHere(path.join("/", file));
                     }}
+                    cursor="pointer"
+                    index={path.join("/", file)}
                     clicks={clicks}
                     name={file}
-                    directory={path.join("/", file)}
                   />
                   {clicks.includes(path.join("/", file)) && (
                     <Clickes clicks={clicks} clik={path.join("/", file)} />

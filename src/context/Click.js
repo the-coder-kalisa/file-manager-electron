@@ -3,6 +3,7 @@ export const ContextProvider = createContext();
 function ClickThe({ children }) {
   const [clicks, setClicks] = useState(["/"]);
   const [currentDir, setCurrentDir] = useState("/");
+  const [selected, setSelected] = useState();
   const [history, setHistory] = useState([currentDir]);
   const [search, setSearch] = useState("");
   const clickHere = (index) => {
@@ -17,6 +18,8 @@ function ClickThe({ children }) {
         history,
         setHistory,
         setSearch,
+        selected,
+        setSelected,
         clickHere,
         currentDir,
         setCurrentDir,
